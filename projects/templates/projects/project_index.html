@@ -3,42 +3,7 @@
 {% load static %}
 
 
-{% block content %}
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Dilip</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            About Me
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Skills</a>
-            <a class="dropdown-item" href="#">Hobby Projects</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Education</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-  
+{% block content %}  
   <div class="jumbotron">
     <h1 class="display-6" style="text-align:center">Dilip Kumar Sharma</h1>
     <p class="lead" style="text-align:center">Tech Lead in Software Development</p>
@@ -58,14 +23,14 @@
             <h5 class="card-title">{{ project.title }}</h5>
             <p class="card-text">{{ project.description }}</p>
         </div>
-        <ul class="list-group list-group-flush">
+        {% comment %} <ul class="list-group list-group-flush">
             {% with project.technology|split:"," as technologies %}
                 {% for technology in technologies %}
                     <li class="list-group-item">{{ technology }}</li>
                     <br>
                 {% endfor %}
             {% endwith %}
-        </ul>
+        </ul> {% endcomment %}
         <div class="card-body">
             <a href={{ project.url }} class="card-link">Source Code</a>
         </div>
