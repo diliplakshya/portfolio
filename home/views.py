@@ -20,7 +20,7 @@ def profile(request):
 
     for company in Company.objects.all():
         projects = ProfessionalProject.objects.all().filter(company = company.id)
-        project_details.append((company.name, projects))
+        project_details.append((company, projects))
 
     # Project Ends #
 

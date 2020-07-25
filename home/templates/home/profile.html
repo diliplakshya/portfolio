@@ -69,8 +69,8 @@
         </h5>
       </div>
         <div class="card-body">
-          {% for project_detail in project_details %}
-              <h1>{{ project_detail.0 }}</h1>
+          {% for company, projects in project_details %}
+              <h1>{{ company.name }}</h1>
               <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                   <tr>
@@ -79,14 +79,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% comment %} 
-                  skill_detail.1 will return list of all skills under skill type. 
-                  e.g. [C++, Python] under Programming languages.
-                  {% endcomment %}
-                  {% for project in project_detail.1 %}
-                    <tr class="table-info">
-                      <td>{{ project.designation }}</td>
-                    </tr>
+                  {% for project in projects %}
+                    {% for field, val in project %}
+                      <div>
+                        <tr class="table-info">
+                          <td>{{ field }}</td>
+                          <td>{{ val }}</td>
+                        </tr>
+                      </div>
+                    {% endfor %}
                   {% endfor %}
                 </tbody>
               </table>
