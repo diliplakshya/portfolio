@@ -6,6 +6,9 @@ def home(request):
     return render(request, template_name="home/home.html")
 
 def profile(request):
+    return render(request, template_name="home/profile.html")
+
+def skill(request):
     # Skill Starts #
     skill_details = list()
 
@@ -15,6 +18,11 @@ def profile(request):
 
     # Skill Ends #
 
+    context = {"skill_details" : skill_details}
+
+    return render(request, template_name="home/skill.html", context=context)
+
+def professional_experience(request):
     # Project Starts #
     project_details = list()
 
@@ -24,6 +32,6 @@ def profile(request):
 
     # Project Ends #
 
-    context = {"skill_details" : skill_details, "project_details" : project_details}
+    context = {"project_details" : project_details}
 
-    return render(request, template_name="home/profile.html", context=context)
+    return render(request, template_name="home/professional_experience.html", context=context)

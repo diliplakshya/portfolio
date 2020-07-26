@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load verbose_tags %}
+
+
+{% block content %}
+  <div>
+    {% for skill_type, skills in skill_details %}
+      <h1>{{ skill_type }}</h1>
+      <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Skill</th>
+            <th scope="col">Work Experience</th>
+            <th scope="col">Expertise Level (Out of 10)</th>
+            <th scope="col">Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for skill in skills %}
+            <tr class="table-info">
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ skill.name }}</td>
+              <td>{{ skill.experience }}</td>
+              <td>{{ skill.proficiency }}</td>
+              <td>{{ skill.remarks }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endfor %}
+  </div>
+{% endblock content %}
