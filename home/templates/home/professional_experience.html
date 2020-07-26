@@ -8,11 +8,19 @@
         <table class="table table-bordered table-hover">
           <tbody>
             {% for project in projects %}
+              {% for field, val in company %}
+                <div>
+                  <tr class="table-info">
+                    <td>{{ field }}</td>
+                    <td>{{ val}}</td>
+                  </tr>
+                </div>
+              {% endfor %}
               {% for field, val in project %}
                 <div>
                   <tr class="table-info">
                     <td>{{ field }}</td>
-                    <td>{{ val }}</td>
+                    <td>{{ val|linebreaksbr}}</td>
                   </tr>
                 </div>
               {% endfor %}

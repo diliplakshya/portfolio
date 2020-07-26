@@ -28,11 +28,12 @@ class Company(models.Model):
         return (self.name)
 
     def __iter__(self):
-        for field in self._meta.fields():
-            yield (field.verbose_name, field.value_to_string(self))
+        for field in self._meta.fields:
+            if field.verbose_name not in ["ID", "Organization Name"]:
+                yield (field.verbose_name, field.value_to_string(self))
 
 class ProfessionalProject(models.Model):
-    company             =           models.ForeignKey(Company, on_delete=models.CASCADE)
+    company             =           models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name="Company")
     designation         =           models.CharField(max_length=50, verbose_name="Designation")
     title               =           models.CharField(max_length=100, verbose_name="Title")
     client              =           models.CharField(max_length=100, verbose_name="Client")
@@ -48,4 +49,5 @@ class ProfessionalProject(models.Model):
 
     def __iter__(self):
         for field in self._meta.fields:
-            yield (field.verbose_name, field.value_to_string(self))
+            if field.verbose_name not in ["ID", "Company"]:
+                yield (field.verbose_name, field.value_to_string(self))
