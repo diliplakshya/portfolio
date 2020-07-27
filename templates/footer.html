@@ -1,0 +1,54 @@
+{% load i18n %}
+
+<footer class="page-footer font-small stylish-color-dark pt-4" style="margin-top:50px;">
+    <div class="container text-center text-sm-left">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Portfolio</h5>
+                <p>Dilip Kumar Sharma's portfolio.</p>
+            </div>
+            <div class="col-md-2 mx-auto">
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">About</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a class="btn-link" href="{% url 'contact' %}">
+                            Contact Us
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn-link" href="{% url 'about' %}">
+                            {% trans "About Us" %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2 mx-auto">
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">{% trans "Help" %}</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">FAQs</a>
+                    </li>
+                    <li>
+                        <a href="#!">Help</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2 mx-auto">
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Social</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://www.linkedin.com/in/diliplakshya" target="_blank">LinkedIn</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/diliplakshya" target="_blank">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-copyright text-center">© 2020 Copyright:
+        <a href="#">dilipdk2506@gmail.com</a>
+    </div>
+</footer>

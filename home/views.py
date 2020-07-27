@@ -35,3 +35,9 @@ def professional_experience(request):
     context = {"project_details" : project_details}
 
     return render(request, template_name="home/professional_experience.html", context=context)
+
+def about(request):
+    return render(request, template_name="home/about.html")
+
+def contact(request):
+    return render(request, template_name="home/contact.html")
