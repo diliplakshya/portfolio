@@ -23,9 +23,11 @@
                 {% endfor %}
             {% endwith %}
         </ul> {% endcomment %}
-        <div class="card-body">
-            <a href={{ project.url }} class="card-link">Source Code</a>
-        </div>
+        {% if project.is_sc_enabled %}
+          <div class="card-body">
+              <a href={{ project.url }} class="card-link">Source Code</a>
+          </div>
+        {% endif %}
       </div>
       </div>
     {% endfor %}
