@@ -20,6 +20,7 @@ class Skill(models.Model):
 
 class Company(models.Model):
     name                =           models.CharField(max_length=100, verbose_name="Organization Name")
+    image               =           models.CharField(max_length=30, verbose_name="Image", default="", blank=True)
     from_date           =           models.DateField(verbose_name="From")
     to_date             =           models.DateField(verbose_name="To")
     location            =           models.CharField(max_length=100, verbose_name="Location")
@@ -31,12 +32,11 @@ class Company(models.Model):
 
     def __iter__(self):
         for field in self._meta.fields:
-            if field.verbose_name not in ["ID", "Organization Name"]:
+            if field.verbose_name not in ["ID", "Organization Name", "Image"]:
                 yield (field.verbose_name, field.value_to_string(self))
 
 class ProfessionalProject(models.Model):
     company             =           models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name="Company")
-    image               =           models.CharField(max_length=30, verbose_name="Image", default="", blank=True)
     title               =           models.CharField(max_length=100, verbose_name="Title")
     client              =           models.CharField(max_length=100, verbose_name="Client")
     team_size           =           models.IntegerField(verbose_name="Team Size")
@@ -53,6 +53,7 @@ class ProfessionalProject(models.Model):
         for field in self._meta.fields:
             if field.verbose_name not in ["ID", "Company", "Image"]:
                 yield (field.verbose_name, field.value_to_string(self))
+
 
 class HobbyProject(models.Model):   
     title           =   models.CharField(max_length=30, verbose_name="Title")
