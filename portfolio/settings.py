@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
+from decouple import config, Csv        # Please update .env file or config vars on Heroku
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,12 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0y9qq+1@+h7u12^s&sge^^2vozgcssiz=h+9!%yr&o=w2vh4t_'
+# SECRET_KEY = '0y9qq+1@+h7u12^s&sge^^2vozgcssiz=h+9!%yr&o=w2vh4t_'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default = True, cast=bool)
 
-ALLOWED_HOSTS = ["127.0.0.1", "https://dilipsharma.herokuapp.com"]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -84,9 +86,11 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': 'portfolio/configurations/db.conf',
-        },
+        'NAME': config('MYSQL_DB_NAME'),
+        'USER': config('MYSQL_DB_USER'),
+        'PASSWORD': config('MYSQL_DB_PASSWORD'),
+        'HOST': config('MYSQL_DB_HOST'),
+        'PORT': '',
     }
 }
 
@@ -128,4 +132,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS=True
+
 django_heroku.settings(locals())
