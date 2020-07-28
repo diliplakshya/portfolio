@@ -2,29 +2,286 @@
 {% load static %}
 
 
+{% comment %} <!DOCTYPE html>
+<html lang="en"> {% endcomment %}
+
+{% comment %} <head>
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
+  <meta content="description" name="description">
+  <meta name="google" content="notranslate" />
+  <meta content="Mashup templates have been developped by Orson.io team" name="author">
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+  
+
+</head> {% endcomment %}
+
 {% block content %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>I am looking for a job in Software Development. If you are a recruiter and if you liked my profile then please send me an e-mail. Thank You.</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <!-- Add your content of header -->
+    <div class="background-color-layer" style="background-image: url('home/images/dilip.jpg')">
     </div>
-
-    <div class="jumbotron">
-        <h1 class="display-6" style="text-align:center">Dilip Kumar Sharma</h1>
-        
-        <p class="lead" style="text-align:center">Tech Lead in Software Development</p>
-        
-        <hr class="my-4">
-        
-        <div class="text-center"> 
-            <img src="{% static 'home/images/dilip.jpg' %}" class="rounded-circle mx-auto d-block" alt="Dilip">
-        </div>
-
-        <hr class="my-4">
-
+    <main class="content-wrapper">
+    <header class="white-text-container section-container">
         <div class="text-center">
-            <a class="btn btn-success btn-lg" href="{% url 'profile' %}" role="button">View Profile</a>
+        <h1>Dilip Kumar Sharma</h1>
+        <p>Tech Lead in Software Development</p>
+        <p>
+          <a class="fa-icon fa-icon-2x" href="https://facebook.com/" title="Facebook">
+            <i class="fa fa-facebook"></i>
+          </a>
+          <a class="fa-icon fa-icon-2x" href="https://twitter.com/" title="Twitter">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a class="fa-icon fa-icon-2x" href="https://www.linkedin.com/in/diliplakshya" title="Dilip's LinkedIn">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          <a class="fa-icon fa-icon-2x" href="https://github.com/diliplakshya" title="Dilip's GitHub">
+            <i class="fa fa-github"></i>
+          </a>
+        </p>
+        </div>
+    </header>
+
+    <!-- Add your site or app content here -->
+    
+    <div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-block">
+                    <h2>About Me</h2>
+                    <div class="row">
+                    <div class="col-md-4">
+                        <p><img src="{% static 'home/images/dilip.jpg' %}" class="img-responsive" alt="Dilip Kumar Sharma"></p>
+                    </div>
+                    <div class="col-md-8">
+
+                    <p>I have 9.8 years of work experience in software development. </p>
+                    <p>I have been an individual contributor in 5 successful projects.</p>
+                    <p>I am experienced in C++, Python in Linux and Windows using SDLC and Agile methodology. </p>
+                    <p>I have good exposure in Git/BitBucket/GitHub, MySQL, Data Structure, Python Django Web Framework, Shell Scripting, CORBA, Multi-threading.</p>
+                    <p>I am good in designing the software applications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h2>Work Experience</h2>
+                {% for work in works %}
+                    <h3 class="h5 date-title"><a href={{ work.url }} title="">{{ work.name }}</a></p>
+                    <small class="">{{ work.location }}</small>
+                    <br>                  
+                    <small class="date">{{ work.from_date }} - {{ work.to_date }}</small>                    
+                    <h6 class="h6 date-title">{{ work.designation }}</h6>
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h2>Professional Projects</h2>
+                <div class="row">
+                    <!--Carousel Wrapper-->
+                    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+                        <!--Controls-->
+                        <div class="controls-top">
+                            <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+                            <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+                                class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <!--/.Controls-->
+
+                        <!--Indicators-->
+                        <a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <!--/.Indicators-->
+                    <!--Slides-->
+                    <div class="carousel-inner" role="listbox">
+                        {% for project in projects %}
+                            {% if forloop.first %}
+                                <div class="carousel-item active">  <!--/.First slide-->
+                            {% else %}
+                                <div class="carousel-item">
+                            {% endif %}
+                                    <div class="col-sm" style="float:left">
+                                        <div class="card mb-2" style="width: 30rem;">
+                                            <img class="card-img-top"
+                                                src="{% static 'home/images/'|add:project.image %}" alt="Card image cap">
+                                            </img>
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{ project.title }}</h4>
+                                                <a class="btn btn-primary" href="{% url 'project' project.id %}">View</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!--/.Slides-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h2>Hobby Projects</h2>
+                <div class="row">
+                    <!--Carousel Wrapper-->
+                    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+                        <!--Controls-->
+                        <div class="controls-top">
+                            <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+                            <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+                                class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <!--/.Controls-->
+
+                        <!--Indicators-->
+                        <a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <!--/.Indicators-->
+                    <!--Slides-->
+                    <div class="carousel-inner" role="listbox">
+                        {% comment %} {% for project in projects %}
+                            {% if forloop.first %}
+                                <div class="carousel-item active">      <!--First slide-->
+                            {% else %}
+                                <div class="carousel-item">
+                            {% endif %}
+                                    <div class="col-sm" style="float:left">
+                                        <div class="card mb-2" style="width: 30rem;">
+                                            <img class="card-img-top"
+                                                src="{% static 'home/images/'|add:project.image %}" alt="Card image cap">
+                                            </img>
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{ project.title }}</h4>
+                                                <a class="btn btn-primary" href="{% url 'project' project.id %}">Source Code</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        {% endfor %} {% endcomment %}
+                    </div>
+                    <!--/.Slides-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h2>Education</h2>
+                <div class="row">
+                <div class="col-md-4">
+                    <div class="education-experience">
+                        <small class="date">2009-2005</small>
+                        <h3 class="h5 date-title">B.E. Computer Science</h3>
+                        <p>Rajasthan University</p>
+                        <p>72.21 %</p>
+                    </div>
+                    
+                </div>
+                <div class="col-md-4">
+                    <div class="education-experience">
+                        <small class="date">2004-2003</small>
+                        <h3 class="h5 date-title">Higher Secondary</h3>
+                        <p>RBSE</p>
+                        <p>65.23 %</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="education-experience">
+                        <small class="date">2002-2001</small>
+                        <h3 class="h5 date-title">Secondary</h3>
+                        <p>RBSE</p>
+                        <p>69.67 %</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            
+            <div class="card">
+            <div class="card-block">
+                <h2>Language</h2>
+                <div class="row">
+                <div class="col-md-4">
+                    <div class="language-experience">
+                    <h3 class="h5">English  <small>Fluent</small></h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="language-experience">
+                    <h3 class="h5">Hindi  <small>Fluent</small></h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="language-experience">
+                    <h3 class="h5">Marwari  <small>Fluent</small></h3>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            
+            <div class="card">
+            <div class="card-block">
+                <h2>Social Network</h2>
+                <div class="row">
+                <div class="col-md-3">
+                    <p class="social-buttons"><a href="https://twitter.com/" title=""><span class="social-round-icon fa-icon"><i class="fa fa-twitter"></i></span>@diliplakshya</a></p>
+                </div>
+                <div class="col-md-3">
+                    <p class="social-buttons"><a href="https://www.linkedin.com/in/diliplakshya" title="Dilip's LinkedIn"><span class="social-round-icon fa-icon"><i class="fa fa-linkedin"></i></span>Dilip Kumar Sharma</a></p>
+                </div>
+                <div class="col-md-3">
+                    <p class="social-buttons"><a href="https://github.com/diliplakshya" title="Dilip's GitHub"><span class="social-round-icon fa-icon"><i class="fa fa-github"></i></span>Dilip Kumar Sharma</a></p>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="card">
+                <div class="card-block">
+                    <h2>Contact</h2>
+                    <form action="" class="reveal-content">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="subject" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" placeholder="Enter your message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class=" btn btn-primary">Send message</button>
+                    </div> 
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+    </div>
+
+    </main>
 {% endblock content %}

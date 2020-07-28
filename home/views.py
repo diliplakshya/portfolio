@@ -3,7 +3,24 @@ from .models import SkillType, Skill, Company, ProfessionalProject
 
 
 def home(request):
-    return render(request, template_name="home/home.html")
+    # Project Starts #
+    projects = list()
+
+    for company in Company.objects.all():
+        for project in ProfessionalProject.objects.all().filter(company = company.id):
+            projects.append(project)
+
+    # Project Ends #
+    context = {"works" : Company.objects.all(), "projects" : projects}
+    
+    return render(request, template_name="home/home.html", context=context)
+
+def project(request, project_id):
+    professional_projects = ProfessionalProject.objects.filter(id = project_id)
+
+    context = {"projects" : professional_projects}
+    
+    return render(request, template_name="home/project.html", context=context)
 
 def profile(request):
     return render(request, template_name="home/profile.html")

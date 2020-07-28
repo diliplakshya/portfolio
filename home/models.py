@@ -23,6 +23,8 @@ class Company(models.Model):
     from_date           =           models.DateField(verbose_name="From")
     to_date             =           models.DateField(verbose_name="To")
     location            =           models.CharField(max_length=100, verbose_name="Location")
+    designation         =           models.CharField(max_length=100, default="Developer", verbose_name="Designation")
+    url                 =           models.URLField(default="", blank=True, verbose_name="Url")
 
     def __str__(self):
         return (self.name)
@@ -34,7 +36,7 @@ class Company(models.Model):
 
 class ProfessionalProject(models.Model):
     company             =           models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name="Company")
-    designation         =           models.CharField(max_length=50, verbose_name="Designation")
+    image               =           models.CharField(max_length=30, verbose_name="Image", default="", blank=True)
     title               =           models.CharField(max_length=100, verbose_name="Title")
     client              =           models.CharField(max_length=100, verbose_name="Client")
     team_size           =           models.IntegerField(verbose_name="Team Size")
@@ -49,5 +51,21 @@ class ProfessionalProject(models.Model):
 
     def __iter__(self):
         for field in self._meta.fields:
-            if field.verbose_name not in ["ID", "Company"]:
+            if field.verbose_name not in ["ID", "Company", "Image"]:
                 yield (field.verbose_name, field.value_to_string(self))
+
+# class HobbyProject(models.Model):   
+#     title           =   models.CharField(max_length=30, verbose_name="Title")
+#     description     =   models.TextField(verbose_name="Description")
+#     image           =   models.CharField(max_length=20, verbose_name="Image")
+#     technology      =   models.CharField(max_length=200, verbose_name="Technology")
+#     url             =   models.URLField(verbose_name="Url")
+#     is_sc_enabled   =   models.BooleanField(default=False, verbose_name="Source Code Enabled")
+
+#     def __str__(self):
+#         return self.title
+    
+#     def __iter__(self):
+#         for field in self._meta.fields:
+#             if field.verbose_name not in ["ID", "Image", "Source Code Enabled"]:
+#                 yield (field.verbose_name, field.value_to_string(self))
