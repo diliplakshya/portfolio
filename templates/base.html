@@ -49,6 +49,10 @@
         </ul>
       </div>
     </nav>
+    
+    {% block messages %}
+        {% include "messages.html" %}
+    {% endblock messages %}
 
     {% block content %}
     {% endblock content %}

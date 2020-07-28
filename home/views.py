@@ -1,21 +1,54 @@
 from django.shortcuts import render
 from .models import SkillType, Skill, Company, ProfessionalProject, HobbyProject
+from django.core.mail import send_mail
+from decouple import config, Csv        # Please update .env file or config vars on Heroku
+from lib.portfolio.forms import ContactForm
+from django.contrib import messages
 
 
 def home(request):
-    # Project Starts #
+    contact = None
+    context = None
     professional_projects = list()
+    hobby_projects = None
 
-    for company in Company.objects.all():
-        for project in ProfessionalProject.objects.all().filter(company = company.id):
-            professional_projects.append(project)
+    # if this is a POST request we need to process the form data
+    if request.method == "POST":
+        # create a form instance and populate it with data from the request
+        contact = ContactForm(request.POST)
 
-    # Project Ends #
-
-    hobby_projects = HobbyProject.objects.all()
-
-    context = {"works" : Company.objects.all(), "professional_projects" : professional_projects, "hobby_projects" : hobby_projects}
+        # check whether it's valid
+        if contact.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
     
+            sender          =   contact.cleaned_data['email']
+            subject         =   contact.cleaned_data['subject']
+            message         =   contact.cleaned_data['message']
+            
+            recipients = config('EMAIL_RECIPIENTS', cast=Csv())
+
+            send_mail(subject, message, sender, recipients)
+
+            messages.success(request, "Thank You. Email is sent successfully.")
+        else:
+            messages.error(request, f"Failed to send email.")
+    else:
+        # Project Starts #
+        
+        for company in Company.objects.all():
+            for project in ProfessionalProject.objects.all().filter(company = company.id):
+                professional_projects.append(project)
+
+        # Project Ends #
+
+        hobby_projects = HobbyProject.objects.all()
+
+    contact = ContactForm()
+
+    context = {"works" : Company.objects.all(), "professional_projects" : professional_projects, "hobby_projects" : hobby_projects, "contact" : contact}
+        
     return render(request, template_name="home/home.html", context=context)
 
 def project(request, project_id):
@@ -58,6 +91,3 @@ def professional_experience(request):
 
 def about(request):
     return render(request, template_name="home/about.html")
-
-def contact(request):
-    return render(request, template_name="home/contact.html")
