@@ -109,7 +109,7 @@
                         <!--/.Indicators-->
                     <!--Slides-->
                     <div class="carousel-inner" role="listbox">
-                        {% for project in projects %}
+                        {% for project in professional_projects %}
                             {% if forloop.first %}
                                 <div class="carousel-item active">  <!--/.First slide-->
                             {% else %}
@@ -161,7 +161,7 @@
                         <!--/.Indicators-->
                     <!--Slides-->
                     <div class="carousel-inner" role="listbox">
-                        {% comment %} {% for project in projects %}
+                        {% for project in hobby_projects %}
                             {% if forloop.first %}
                                 <div class="carousel-item active">      <!--First slide-->
                             {% else %}
@@ -173,13 +173,21 @@
                                                 src="{% static 'home/images/'|add:project.image %}" alt="Card image cap">
                                             </img>
                                             <div class="card-body">
+                                            {% comment %} <ul class="list-group list-group-flush">
+                                            {% with project.technology|split:"," as technologies %}
+                                                {% for technology in technologies %}
+                                                    <li class="list-group-item">{{ technology }}</li>
+                                                    <br>
+                                                {% endfor %}
+                                            {% endwith %}
+                                        </ul> {% endcomment %}
                                                 <h4 class="card-title">{{ project.title }}</h4>
-                                                <a class="btn btn-primary" href="{% url 'project' project.id %}">Source Code</a>
+                                                <a class="btn btn-primary" href={{ project.url }}>Source Code</a>
                                             </div>
                                         </div>
                                     </div>
                             </div>
-                        {% endfor %} {% endcomment %}
+                        {% endfor %}
                     </div>
                     <!--/.Slides-->
                     </div>

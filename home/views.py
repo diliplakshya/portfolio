@@ -1,17 +1,20 @@
 from django.shortcuts import render
-from .models import SkillType, Skill, Company, ProfessionalProject
+from .models import SkillType, Skill, Company, ProfessionalProject, HobbyProject
 
 
 def home(request):
     # Project Starts #
-    projects = list()
+    professional_projects = list()
 
     for company in Company.objects.all():
         for project in ProfessionalProject.objects.all().filter(company = company.id):
-            projects.append(project)
+            professional_projects.append(project)
 
     # Project Ends #
-    context = {"works" : Company.objects.all(), "projects" : projects}
+
+    hobby_projects = HobbyProject.objects.all()
+
+    context = {"works" : Company.objects.all(), "professional_projects" : professional_projects, "hobby_projects" : hobby_projects}
     
     return render(request, template_name="home/home.html", context=context)
 
