@@ -183,7 +183,9 @@
                                             {% endwith %}
                                         </ul> {% endcomment %}
                                                 <h4 class="card-title">{{ project.title }}</h4>
-                                                <a class="btn btn-primary" href={{ project.url }}>Source Code</a>
+                                                {% if project.is_sc_enabled %}
+                                                    <a class="btn btn-primary" href={{ project.url }}>Source Code</a>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
