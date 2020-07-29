@@ -4,7 +4,7 @@
 {% block content %}
   <div class="card-body">
     {% for company, projects in project_details %}
-        <h1>{{ company.name }}</h1>
+        <h3>{{ company.name }}</h3>
             {% for project in projects %}
             <table class="table table-bordered table-hover">
               <tbody>
