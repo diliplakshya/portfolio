@@ -31,9 +31,9 @@ def home(request):
 
             send_mail(subject, message, sender, recipients)
 
-            messages.success(request, "Thank You. Email is sent successfully.")
+            messages.success(request, "Thank You. Message is sent successfully.")
         else:
-            messages.error(request, f"Failed to send email.")
+            messages.error(request, f"Failed to send message.")
     else:
         # Project Starts #
         

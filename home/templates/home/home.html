@@ -274,8 +274,7 @@
             <div class="card">
                 <div class="card-block">
                     <h2>Contact</h2>
-                        {% comment %} <form action="{% url 'home' %}" method = "post"> {% endcomment %}
-                        <form action="">
+                        <form action="{% url 'home' %}" method = "post">
                             {% csrf_token %}
                             {{ contact | crispy }}
                             <button type="submit" class=" btn btn-primary">Send Message</button>
